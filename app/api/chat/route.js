@@ -12,11 +12,15 @@ const systemPrompt = 'You are an AI chatbot specialized in Data Structures and A
 
 export async function POST(req) {
   try {
+    
     const data = await req.json();
-    const userMessages = data.messages.filter(message => message.role === 'user');
+    console.log('Received data:', data);
+
+    const userMessages = data.messages?.filter(message => message.role === 'user') || [];
+
 
     if (userMessages.length === 0) {
-      return NextResponse.json({ message: 'Invalid request format. Insert message.' }, { status: 400 });
+      return NextResponse.json({ message: 'Invalid request format. Insert new message.' }, { status: 400 });
     }
 
     const completion = await groq.chat.completions.create({
