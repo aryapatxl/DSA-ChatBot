@@ -7,7 +7,7 @@ export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hi! I'm the Headstarter support assistant. How can I help you today?",
+      content: "Hello and welcome! I’m your dedicated assistant for all things Data Structures and Algorithms (DSA). Whether you're navigating your coursework, gearing up for a technical interview, or brushing up on the material, I’m here to help you master these crucial concepts. Ask me anything about data structures or algorithms—how they work, where they’re used, or clarifying questions. Together, we’ll build a strong foundation and boost your confidence in DSA! What can I help you with today?"
     },
   ])
   const [message, setMessage] = useState('')
