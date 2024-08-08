@@ -1,6 +1,9 @@
 //API route will handle communication between frontend and OpenAI API
 import { NextResponse } from 'next/server';
+
 import Groq from 'groq-sdk';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
