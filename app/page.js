@@ -114,7 +114,7 @@ export default function Home() {
         spacing={3}
         sx={{ backgroundColor: '#1e1e1e', borderRadius: 2 }}
       >
-       <Typography variant="h5" display = "flex" align = "center" >AlgoBot</Typography>
+       
         <Stack
           direction={'column'}
           spacing={3}

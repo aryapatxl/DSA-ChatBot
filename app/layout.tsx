@@ -40,7 +40,7 @@ export default function RootLayout({
           {/* Render the UserButton, signed-in message, and children when the user is signed in */}
           <SignedIn>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px' }}>
-              <h2 style={{ color: '#ffffff', fontFamily: 'Arial, sans-serif' }}>You are signed in</h2>
+              <p style={{ color: '#ffffff', fontFamily: 'Arial, sans-serif' }}>You are signed in</p>
               <UserButton />
             </div>
             <main style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
