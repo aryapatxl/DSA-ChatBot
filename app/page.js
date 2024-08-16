@@ -1,7 +1,9 @@
-'use client'
-import { Box, Button, Stack, TextField, Avatar, Typography } from '@mui/material'
-import { useState, useEffect, useRef } from 'react'
-import { useUser } from '@clerk/nextjs'
+'use client';
+import { Box, Button, Stack, TextField, Avatar, Typography } from '@mui/material';
+import { useState, useEffect, useRef } from 'react';
+import { useUser } from '@clerk/nextjs';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 export default function Home() {
   const { user, isLoaded } = useUser();
@@ -11,7 +13,6 @@ export default function Home() {
 
   useEffect(() => {
     if (isLoaded) {
-      // initialize messages once user data is loaded, so the 'welcome *name*' works properly
       setMessages([
         {
           role: 'assistant',
@@ -20,16 +21,17 @@ export default function Home() {
       ]);
     }
   }, [isLoaded, user]);
+
   const sendMessage = async () => {
     if (!message.trim() || isLoading) return;
-    setIsLoading(true)
-    setMessage('')
+    setIsLoading(true);
+    setMessage('');
     setMessages((messages) => [
       ...messages,
       { role: 'user', content: message },
       { role: 'assistant', content: '' },
-    ])
-    
+    ]);
+
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -37,55 +39,61 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ messages: [...messages, { role: 'user', content: message }] }),
-      })
-  
+      });
+
       if (!response.ok) {
-        throw new Error('Network response was not ok')
+        throw new Error('Network response was not ok');
       }
-  
-      const reader = response.body.getReader()
-      const decoder = new TextDecoder()
-  
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
       while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-        const text = decoder.decode(value, { stream: true })
+        const { done, value } = await reader.read();
+        if (done) break;
+        const text = decoder.decode(value, { stream: true });
         setMessages((messages) => {
-          let lastMessage = messages[messages.length - 1]
-          let otherMessages = messages.slice(0, messages.length - 1)
+          let lastMessage = messages[messages.length - 1];
+          let otherMessages = messages.slice(0, messages.length - 1);
           return [
             ...otherMessages,
             { ...lastMessage, content: lastMessage.content + text },
-          ]
-        })
+          ];
+        });
       }
     } catch (error) {
-      console.error('Error:', error)
+      console.error('Error:', error);
       setMessages((messages) => [
         ...messages,
         { role: 'assistant', content: "I'm sorry, but I encountered an error. Please try again later." },
-      ])
+      ]);
     }
-    
-    setIsLoading(false)
-  }
+
+    setIsLoading(false);
+  };
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault()
-      sendMessage()
+      event.preventDefault();
+      sendMessage();
     }
-  }
+  };
 
-  const messagesEndRef = useRef(null)
+  const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    scrollToBottom();
+  }, [messages]);
+
+  // Function to render HTML safely and trim trailing whitespace
+  const renderMarkdown = (text) => {
+    const htmlContent = marked(text).trim(); // Trim trailing whitespace
+    return DOMPurify.sanitize(htmlContent);
+  };
 
   return (
     <Box
@@ -95,15 +103,16 @@ export default function Home() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      sx={{ backgroundColor: '#282c34' }}
     >
       <Stack
         direction={'column'}
-        width="500px"
-        height="700px"
-        border="1px solid black"
+        width="600px"
+        height="800px"
         p={2}
+        border="1px solid #8c9eff" // Muted blue for border
         spacing={3}
-        
+        sx={{ backgroundColor: '#1e1e1e', borderRadius: 2 }}
       >
        <Typography variant="h5" display = "flex" align = "center" >AlgoBot</Typography>
         <Stack
@@ -112,7 +121,6 @@ export default function Home() {
           flexGrow={1}
           overflow="auto"
           maxHeight="100%"
-
         >
           {messages.map((message, index) => (
             <Box
@@ -122,27 +130,41 @@ export default function Home() {
                 message.role === 'assistant' ? 'flex-start' : 'flex-end'
               }
               alignItems="center"
-        
               spacing={1}
+              sx={{ flexWrap: 'wrap', width: '90%' }} // Ensure messages wrap within the container
             >
               {message.role === 'assistant' && (
-                <Avatar alt="Assistant" src="/path/to/assistant-icon.png" />
+                <Avatar sx={{ marginRight: 1, bgcolor: '#8c9eff' }}> {/* Muted blue for avatar */}
+                  B
+                </Avatar>
               )}
-
               <Box
                 bgcolor={
                   message.role === 'assistant'
-                    ? 'primary.main'
-                    : 'secondary.main'
+                    ? '#8c9eff' // Muted blue for assistant messages
+                    : '#0056b3' // Muted blue for user messages
                 }
-                color="white"
-                letterSpacing=".5px"
+                color="#ffffff"
+                fontFamily={'Arial, sans-serif'}
+                letterSpacing=".8px"
                 borderRadius={5}
-                p={2.5}
+                p={3}
+                paddingLeft="5%"
                 maxWidth="70%"
-              >
-                {message.content}
-              </Box>
+                sx={{
+                  fontSize: '0.8rem',
+                  overflowWrap: 'break-word', /* Ensure long words break onto the next line */
+                  wordBreak: 'break-word', /* Break words if necessary */
+                  whiteSpace: 'pre-wrap', /* Preserve whitespace and wrap text */
+                  boxSizing: 'border-box', /* Include padding and border in the element's total width and height */
+                }}
+                dangerouslySetInnerHTML={{ __html: renderMarkdown(message.content) }}
+              />
+            {message.role === 'user' && (
+                <Avatar sx={{ marginLeft: 1,color: '#0056b3', bgcolor: 'white' }}> {/* Muted blue for avatar */}
+                  {user?.firstName ? user.firstName.charAt(0) : "Y"}
+                </Avatar>
+              )}
             </Box>
           ))}
           <div ref={messagesEndRef} />
@@ -155,16 +177,40 @@ export default function Home() {
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyPress}
             disabled={isLoading}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: '#8c9eff', // Muted blue for border
+                },
+                '&:hover fieldset': {
+                  borderColor: '#8c9eff', // Muted blue on hover
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#8c9eff', // Muted blue when focused
+                },
+              },
+              '& .MuiInputLabel-root': {
+                color: '#8c9eff', // Muted blue for label
+              },
+              '& .MuiInputBase-input': {
+                color: '#ffffff', // Set text color to white
+              },
+            }}
           />
           <Button 
             variant="contained" 
             onClick={sendMessage}
             disabled={isLoading}
+            sx={{ 
+              backgroundColor: '#8c9eff', // Muted blue for button
+              color: '#ffffff', 
+              '&:hover': { backgroundColor: '#6a7db3' } // Darker muted blue on hover
+            }}
           >
             {isLoading ? 'Sending...' : 'Send'}
           </Button>
         </Stack>
       </Stack>
     </Box>
-  )
+  );
 }
