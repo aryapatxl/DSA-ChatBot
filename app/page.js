@@ -121,6 +121,7 @@ export default function Home() {
           flexGrow={1}
           overflow="auto"
           maxHeight="100%"
+          maxWidth="100%"
         >
           {messages.map((message, index) => (
             <Box
@@ -131,7 +132,7 @@ export default function Home() {
               }
               alignItems="center"
               spacing={1}
-              sx={{ flexWrap: 'wrap', width: '90%' }} // Ensure messages wrap within the container
+              sx={{ flexWrap: 'wrap', width: '100%' }} // Ensure messages wrap within the container
             >
               {message.role === 'assistant' && (
                 <Avatar sx={{ marginRight: 1, bgcolor: '#8c9eff' }}> {/* Muted blue for avatar */}
@@ -161,7 +162,7 @@ export default function Home() {
                 dangerouslySetInnerHTML={{ __html: renderMarkdown(message.content) }}
               />
             {message.role === 'user' && (
-                <Avatar sx={{ marginLeft: 1,color: '#0056b3', bgcolor: 'white' }}> {/* Muted blue for avatar */}
+                <Avatar sx={{ marginLeft: 1, color: '#0056b3', bgcolor: 'white' }}> {/* Muted blue for avatar */}
                   {user?.firstName ? user.firstName.charAt(0) : "Y"}
                 </Avatar>
               )}
