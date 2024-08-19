@@ -6,6 +6,7 @@ import {
   UserButton
 } from '@clerk/nextjs';
 import './globals.css';
+import { Button } from '@mui/material';
 
 export default function RootLayout({
   children,
@@ -33,7 +34,9 @@ export default function RootLayout({
               <p style={{ marginBottom: '40px', fontSize: '1.2rem', fontFamily: 'Arial, sans-serif' }}>
                 Please sign in to continue
               </p>
-              <SignInButton />
+              <SignInButton>
+              <Button>Sign-In</Button>
+              </SignInButton>
             </div>
           </SignedOut>
 
