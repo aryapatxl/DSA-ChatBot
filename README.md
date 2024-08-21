@@ -31,7 +31,7 @@ Welcome to AlgoBot, your handy tool for all things Data Structures and Algorithm
 ## Tech Stack
 
 - **Next.js:** React framework for building fast and user-friendly web applications.
-- **Material UI: For UI design implementation.
+- **Material UI:** For UI design implementation.
 - **GROQ API:** For efficient querying of messages.
 - **Clerk API:** User authentication and management.
 - **Vercel:** Hosting and deployment of the Next.js application.
