@@ -13,24 +13,25 @@ Welcome to AlgoBot, your handy tool for all things Data Structures and Algorithm
     - AlgoBot provides clear, concise, and rigorous explanations of various DSA concepts, including data structures (e.g., arrays, linked lists, stacks, queues, trees, graphs) and algorithms (e.g., sorting, searching, graph traversal, dynamic programming).
 - 2.**Conceptual Understanding:**
   - AlgoBot helps users grasp the underlying concepts and principles of DSA, rather than just providing step-by-step solutions. This helps users develop a deeper understanding of the topics.
--3.**Example-Based Learning:**
+- 3.**Example-Based Learning:**
     - AlgoBot provides examples and illustrations to help users understand complex concepts and algorithms. These examples can be customized to fit specific user needs and learning styles.
--4.**Practice Problems:**
+- 4.**Practice Problems:**
     - AlgoBot can generate practice problems and exercises to help users reinforce their understanding of DSA concepts. These problems can be tailored to specific topics, difficulty levels, and time limits.
--5.**Code Snippets:**
+- 5.**Code Snippets:**
     - AlgoBot can provide code snippets in popular programming languages (e.g., Python, Java, C++) to help users implement DSA algorithms and data structures.
--6.**Interview Preparation:**
+- 6.**Interview Preparation:**
     - AlgoBot can assist users in preparing for technical interviews by providing tips, tricks, and strategies for common interview questions and challenges.
--7.**Discussion Forum:**
+- 7.**Discussion Forum:**
     - AlgoBot engages in discussions with users to help them clarify doubts, address misconceptions, and work through challenging problems.
--8.**Customized Learning Path:**
+- 8.**Customized Learning Path:**
     - AlgoBot can help users create personalized learning plans and track their progress, ensuring they focus on the topics and skills that need improvement.
--9.**Motivation and Encouragement:**
+- 9.**Motivation and Encouragement:**
     - AlgoBot is designed to be friendly, approachable, and encouraging, helping students stay motivated and engaged throughout their DSA learning journey.
 
 ## Tech Stack
 
 - **Next.js:** React framework for building fast and user-friendly web applications.
+- **Material UI: For UI design implementation.
 - **GROQ API:** For efficient querying of messages.
 - **Clerk API:** User authentication and management.
 - **Vercel:** Hosting and deployment of the Next.js application.
