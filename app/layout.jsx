@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google';
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { ClerkProvider, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import './globals.css';
 import Component from './component'; // Assuming component.jsx is in the same directory
 
@@ -23,13 +23,6 @@ export default function RootLayout({ children }) {
           {/* When the user is not signed in */}
           <SignedOut>
             <Component /> {/* This renders the content from component.jsx */}
-            <div className="flex justify-center py-4">
-              <SignInButton>
-                <button className="rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-                  Sign In
-                </button>
-              </SignInButton>
-            </div>
           </SignedOut>
 
           {/* When the user is signed in */}

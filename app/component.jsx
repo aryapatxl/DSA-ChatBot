@@ -1,17 +1,20 @@
 import Link from "next/link"
+import { SignInButton } from '@clerk/nextjs';
 import { Button } from './/components/ui/button.jsx'
 
 export default function Component() {
   return (
-    <div className="flex min-h-[100dvh] flex-col bg-background text-foreground">
+ <div className="flex min-h-[100dvh] flex-col bg-background text-foreground">
       <header className="flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
           <BotIcon className="h-8 w-8" />
           <span className="text-xl font-bold">AlgoBot</span>
         </Link>
+        <SignInButton>
         <Button className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
           Sign In
         </Button>
+      </SignInButton>
       </header>
       <main className="flex flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-8 text-center">
@@ -40,14 +43,16 @@ export default function Component() {
               <h3 className="mt-2 text-lg font-medium">Proficiency</h3>
             </div>
           </div>
-          <Button className="rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-            Get Started
-          </Button>
+          <SignInButton>
+      <Button className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+          Get Started
+        </Button>
+      </SignInButton>
         </div>
       </main>
       <footer className="bg-muted px-4 py-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center text-sm text-muted-foreground">
-          &copy; 2024 Algo Assistant. All rights reserved.
+          &copy; 2024 AlgoBot. All rights reserved.
         </div>
       </footer>
     </div>
