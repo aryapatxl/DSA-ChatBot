@@ -4,7 +4,7 @@ import { Button } from './/components/ui/button.jsx'
 
 export default function Component() {
   return (
-  <div className="flex min-h-[160dvh] flex-col bg-background text-foreground">
+  <div className="flex min-h-[185dvh] flex-col bg-background text-foreground">
       <header className="flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
           <BotIcon className="h-8 w-8" />
@@ -52,7 +52,7 @@ export default function Component() {
         </div>
       </div>
 
-      <div className="flex flex-1 items-center justify-center bg-muted py-12 md:py-24 lg:py-25">
+      <div className="flex flex-1 items-center justify-center bg-muted py-10 md:py-15 lg:py-20">
         <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
           <div className="space-y-3">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Top Features</h2>
