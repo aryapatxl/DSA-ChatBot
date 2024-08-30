@@ -4,7 +4,7 @@ import { Button } from './/components/ui/button.jsx'
 
 export default function Component() {
   return (
- <div className="flex min-h-[100dvh] flex-col bg-background text-foreground">
+  <div className="flex min-h-[160dvh] flex-col bg-background text-foreground">
       <header className="flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
           <BotIcon className="h-8 w-8" />
@@ -16,10 +16,11 @@ export default function Component() {
         </Button>
       </SignInButton>
       </header>
-      <main className="flex flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+
+      <div className="flex flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-8 text-center">
           <div className="grid gap-4">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Conquer Data Structures and Algorithms.</h1>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Conquer Data Structures and Algorithms</h1>
             <p className="text-lg text-muted-foreground">
               Our data structures and algorithms chatbot is your personal assistant for mastering the fundamentals of
               computer science.
@@ -49,7 +50,86 @@ export default function Component() {
         </Button>
       </SignInButton>
         </div>
-      </main>
+      </div>
+
+      <div className="flex flex-1 items-center justify-center bg-muted py-12 md:py-24 lg:py-25">
+        <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
+          <div className="space-y-3">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Top Features</h2>
+            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Discover the key features that make our data structures and algorithms chatbot your ultimate learning
+              companion.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-3 gap-6 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3">
+            <div className="rounded-lg bg-background p-4 text-center shadow-md transition-all hover:scale-105 hover:shadow-lg">
+              <h3 className="mt-2 text-lg font-medium">Comprehensive Explanations</h3>
+              <p className="text-sm text-muted-foreground">
+                Thorough explanations of fundamental data structures and algorithms.
+
+              </p>
+            </div>
+
+            <div className="rounded-lg bg-background p-4 text-center shadow-md transition-all hover:scale-105 hover:shadow-lg">
+              <h3 className="mt-2 text-lg font-medium">In-depth Understanding</h3>
+              <p className="text-sm text-muted-foreground">
+                Grasp underlying concepts and principles to succeed.
+
+              </p>
+            </div>
+           
+            <div className="rounded-lg bg-background p-4 text-center shadow-md transition-all hover:scale-105 hover:shadow-lg">
+              <h3 className="mt-2 text-lg font-medium">Example-Based Learning</h3>
+              <p className="text-sm text-muted-foreground">
+                Examples and illustrations for complex concepts and algorithms.
+              </p>
+            </div>
+            
+            <div className="rounded-lg bg-background p-4 text-center shadow-md transition-all hover:scale-105 hover:shadow-lg">
+              <h3 className="mt-2 text-lg font-medium">Practice Problems</h3>
+              <p className="text-sm text-muted-foreground">
+                Practice problems and exercises tailored to your learning.
+              </p>
+            </div>
+            
+            <div className="rounded-lg bg-background p-4 text-center shadow-md transition-all hover:scale-105 hover:shadow-lg">
+              <h3 className="mt-2 text-lg font-medium">Code Snippets</h3>
+              <p className="text-sm text-muted-foreground">
+                Learn with provided code snippets in popular programming languages.
+              </p>
+            </div>
+            
+            <div className="rounded-lg bg-background p-4 text-center shadow-md transition-all hover:scale-105 hover:shadow-lg">
+              <h3 className="mt-2 text-lg font-medium">Interview Preparation</h3>
+              <p className="text-sm text-muted-foreground">
+                Tips, tricks, and strategies to ace interviews.
+              </p>
+            </div>
+            
+            <div className="rounded-lg bg-background p-4 text-center shadow-md transition-all hover:scale-105 hover:shadow-lg">
+              <h3 className="mt-2 text-lg font-medium">Discussion Style</h3>
+              <p className="text-sm text-muted-foreground">
+                Work through challenging problem through engaging clarifications.
+              </p>
+            </div>
+            
+            <div className="rounded-lg bg-background p-4 text-center shadow-md transition-all hover:scale-105 hover:shadow-lg">
+              <h3 className="mt-2 text-lg font-medium">Customized Learning Path</h3>
+              <p className="text-sm text-muted-foreground">Create a personalized learning plan to stay motivated.</p>
+            </div>
+            
+            <div className="rounded-lg bg-background p-4 text-center shadow-md transition-all hover:scale-105 hover:shadow-lg">
+              <h3 className="mt-2 text-lg font-medium">Motivation and Encouragement</h3>
+              <p className="text-sm text-muted-foreground">
+                Designed to be friendly through your journey.
+              </p>
+            </div>
+
+          </div>
+        </div>
+       </div>
+
       <footer className="bg-muted px-4 py-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center text-sm text-muted-foreground">
           &copy; 2024 AlgoBot. All rights reserved.
