@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
           {/* When the user is signed in */}
           <SignedIn>
             <header className="flex justify-between items-center p-4">
-              <p className="text-sm font-medium">You are signed in</p>
+              <p className="text-sm font-medium">AlgoBot</p>
               <UserButton />
             </header>
             <main className="p-4">

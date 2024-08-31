@@ -1,6 +1,9 @@
 'use client';
-import { Box, Button, Stack, TextField, Avatar, Typography } from '@mui/material';
-import { useState, useEffect, useRef } from 'react';
+//ui imports
+import React, { useState, useEffect, useRef } from 'react';
+import { Box, Grid, Stack, TextField, Button, Avatar, Typography, IconButton } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+
 import { useUser } from '@clerk/nextjs';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
@@ -97,121 +100,107 @@ export default function Home() {
 
   return (
     <Box
-      width="100vw"
-      height="100vh"
       display="flex"
-      flexDirection="column"
+      height="100vh"
+      width="100vw"
+      bgcolor="background.default"
       justifyContent="center"
       alignItems="center"
-      sx={{ backgroundColor: '#282c34' }}
     >
-      <Stack
-        direction={'column'}
-        width="600px"
-        height="800px"
-        p={2}
-        border="1px solid #8c9eff" // Muted blue for border
-        spacing={3}
-        sx={{ backgroundColor: '#1e1e1e', borderRadius: 2 }}
+      <Box
+        display="flex"
+        flexDirection="column"
+        height="100%"
+        width="100%"
+        maxWidth="600px"
+        maxHeight="800px"
+        borderRadius={2}
+        boxShadow={3}
+        overflow="hidden"
+        sx={{ backgroundColor: '#1e1e1e' }}
       >
-       
-        <Stack
-          direction={'column'}
-          spacing={3}
-          flexGrow={1}
-          overflow="auto"
-          maxHeight="100%"
-          maxWidth="100%"
-        >
+        {/* Header */}
+        <Box display="flex" alignItems="center" borderBottom={1} borderColor="grey.800" p={2} bgcolor="grey.900">
+          <Avatar sx={{ width: 40, height: 40, marginRight: 2, bgcolor: '#000000' }}>A</Avatar>
+          <Box>
+            <Typography variant="subtitle1" fontWeight="bold" color="white">
+             AlgoBot
+            </Typography>
+            <Typography variant="caption" color="grey.500">
+              Live
+            </Typography>
+          </Box>
+        </Box>
+
+        {/* Chat Messages */}
+        <Box flex={1} p={2} overflow="auto" sx={{ backgroundColor: '#1e1e1e' }}>
           {messages.map((message, index) => (
-            <Box
-              key={index}
-              display="flex"
-              justifyContent={
-                message.role === 'assistant' ? 'flex-start' : 'flex-end'
-              }
-              alignItems="center"
-              spacing={1}
-              sx={{ flexWrap: 'wrap', width: '100%' }} // Ensure messages wrap within the container
-            >
+            <Grid container spacing={1} key={index} justifyContent={message.role === 'assistant' ? 'flex-start' : 'flex-end'}>
               {message.role === 'assistant' && (
-                <Avatar sx={{ marginRight: 1, bgcolor: '#8c9eff' }}> {/* Muted blue for avatar */}
-                  B
-                </Avatar>
+                <Grid item>
+                  <Avatar sx={{ bgcolor: '#000000' }}>A</Avatar>
+                </Grid>
               )}
-              <Box
-                bgcolor={
-                  message.role === 'assistant'
-                    ? '#8c9eff' // Muted blue for assistant messages
-                    : '#0056b3' // Muted blue for user messages
-                }
-                color="#ffffff"
-                fontFamily={'Arial, sans-serif'}
-                letterSpacing=".8px"
-                borderRadius={5}
-                p={3}
-                paddingLeft="5%"
-                maxWidth="70%"
-                sx={{
-                  fontSize: '0.8rem',
-                  overflowWrap: 'break-word', /* Ensure long words break onto the next line */
-                  wordBreak: 'break-word', /* Break words if necessary */
-                  whiteSpace: 'pre-wrap', /* Preserve whitespace and wrap text */
-                  boxSizing: 'border-box', /* Include padding and border in the element's total width and height */
-                }}
-                dangerouslySetInnerHTML={{ __html: renderMarkdown(message.content) }}
-              />
-            {message.role === 'user' && (
-                <Avatar sx={{ marginLeft: 1, color: '#0056b3', bgcolor: 'white' }}> {/* Muted blue for avatar */}
-                  {user?.firstName ? user.firstName.charAt(0) : "Y"}
-                </Avatar>
+              <Grid item>
+                <Box
+                  bgcolor={message.role === 'assistant' ? '#000000' : '#000000'}
+                  color="white"
+                  borderRadius={5}
+                  p={2}
+                  maxWidth="400px"
+                  sx={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
+                  dangerouslySetInnerHTML={{ __html: renderMarkdown(message.content) }}
+                />
+              </Grid>
+              {message.role === 'user' && (
+                <Grid item>
+                  <Avatar sx={{ bgcolor: '#000000' }}>
+                    {user?.firstName ? user.firstName.charAt(0) : "Y"}
+                  </Avatar>
+                </Grid>
               )}
-            </Box>
+            </Grid>
           ))}
           <div ref={messagesEndRef} />
-        </Stack>
-        <Stack direction={'row'} spacing={2}>
-          <TextField
-            label="Message"
-            fullWidth
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyDown={handleKeyPress}
-            disabled={isLoading}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': {
-                  borderColor: '#8c9eff', // Muted blue for border
-                },
-                '&:hover fieldset': {
-                  borderColor: '#8c9eff', // Muted blue on hover
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: '#8c9eff', // Muted blue when focused
-                },
-              },
-              '& .MuiInputLabel-root': {
-                color: '#8c9eff', // Muted blue for label
-              },
-              '& .MuiInputBase-input': {
-                color: '#ffffff', // Set text color to white
-              },
-            }}
-          />
-          <Button 
-            variant="contained" 
-            onClick={sendMessage}
-            disabled={isLoading}
-            sx={{ 
-              backgroundColor: '#8c9eff', // Muted blue for button
-              color: '#ffffff', 
-              '&:hover': { backgroundColor: '#6a7db3' } // Darker muted blue on hover
-            }}
-          >
-            {isLoading ? 'Sending...' : 'Send'}
-          </Button>
-        </Stack>
-      </Stack>
+        </Box>
+
+        {/* Footer with input */}
+        <Box p={2} borderTop={1} borderColor="grey.800" bgcolor="grey.900">
+          <Grid container spacing={1} alignItems="center">
+            <Grid item xs>
+              <TextField
+                variant="outlined"
+                size="small"
+                fullWidth
+                placeholder="Type your message..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={handleKeyPress}
+                disabled={isLoading}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': { borderColor: '#ffffff' },
+                    '&:hover fieldset': { borderColor: '#ffffff' },
+                    '&.Mui-focused fieldset': { borderColor: '#ffffff' },
+                  },
+                  input: { color: '#ffffff' },
+                  '& .MuiInputLabel-root': { color: '#ffffff' },
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <IconButton
+                color="primary"
+                onClick={sendMessage}
+                disabled={isLoading}
+                sx={{ backgroundColor: '#ffffff', '&:hover': { backgroundColor: '#ffffff' } }}
+              >
+                {isLoading ? '...' : <SendIcon />}
+              </IconButton>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
     </Box>
   );
 }
