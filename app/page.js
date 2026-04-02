@@ -14,6 +14,7 @@ export default function Home() {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  //show default chatbot message once logged in
   useEffect(() => {
     if (isLoaded) {
       setMessages([
@@ -34,7 +35,7 @@ export default function Home() {
       { role: 'user', content: message },
       { role: 'assistant', content: '' },
     ]);
-
+//fetch api and user sends message
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -51,6 +52,8 @@ export default function Home() {
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
 
+      //real-time responses 
+      //await function helps the system to process piece of data as chunks 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
@@ -92,9 +95,9 @@ export default function Home() {
     scrollToBottom();
   }, [messages]);
 
-  // Function to render HTML safely and trim trailing whitespace
+  // function to render HTML safely and trim trailing whitespace
   const renderMarkdown = (text) => {
-    const htmlContent = marked(text).trim(); // Trim trailing whitespace
+    const htmlContent = marked(text).trim(); // trim trailing whitespace
     return DOMPurify.sanitize(htmlContent);
   };
 

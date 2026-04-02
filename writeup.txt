@@ -1,0 +1,30 @@
+Set up the Development Envirinment- 
+1a. Began by installing Nodejs
+    1b. Then creating next js project.
+2. Added additional dependencies
+    - Install Material UI
+    - Created environment variables file as a local file
+        - Generated LLM/AI API Key 
+        - Generated Clerk API Key for User Authentication
+3. Began working on backend because we have several APIs to handle
+    - Will directly connect to frontend of application
+    - Choose to start here by handling the the LLM/AI API Key 
+    because it is essentially the entirety of the project ->
+    Wouldn't make sense to start on frontend here first because
+    it would not be responsive anyway if the front end and backend
+    are not properly connected
+    - Created route.js file
+        - Began by importing proper libraries such as the one for the AI model
+        - Began by declaring system prompt because this is what the AI model uses
+        to act/respond depending on what is given to the AI.
+    -  Then created POST function, this handles incoming requests from the client side
+    - Then by using the input data from the user's message, and the system prompt I used,
+    the AI model is able to appropriately respond
+    - Reads the input data as a JSON so I created a readable stream to ensure completion 
+    - Then AI responds
+
+    Next is page.js where the frontend is handled
+    - start by creating the default function that will always show the user the default
+    chat message once they are logged in
+    - fetches api
+    - user sends message
