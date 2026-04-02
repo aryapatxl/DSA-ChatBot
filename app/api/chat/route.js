@@ -20,7 +20,7 @@ export async function POST(req) {
 
 
     if (userMessages.length === 0) {
-      return NextResponse.json({ message: 'Invalid request format. Insert new message.' }, { status: 400 });
+      return NextResponse.json({ message: 'Invalid request format. Insert new message.' }, { status: 400 }); //bad request
     }
 
     const completion = await groq.chat.completions.create({
@@ -28,7 +28,7 @@ export async function POST(req) {
         { role: 'system', content: systemPrompt },
         ...userMessages,
       ],
-      model: 'llama3-8b-8192',
+      model: 'llama-3.3-70b-versatile',
       temperature: 0.5,
       stream: true,
     });
